@@ -6,20 +6,28 @@ using System.IO;
 
 namespace WinFormsApp1
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         public MoneyKeeper moneyKeeper = new MoneyKeeper();
         public string startType = string.Empty;
         public string endType = string.Empty;
-        public Form1()
+        private MoneyCreator moneyCreator = null;
+        public MainForm()
         {
+            moneyCreator = new MoneyCreator(this);
             InitializeComponent();
             FormBorderStyle = FormBorderStyle.None;
         }
-
         private void MoneyCalc_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"Денег нет {moneyKeeper.Convert(startType, endType, 1):0.00}");
+            try
+            {
+                MessageBox.Show($"Деньги: {moneyKeeper.Convert(startType, endType, double.Parse(moneyAmount.Text)):0.00}");
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show($"Введите деньги правильно: '0,0'");
+            }
         }
 
         private void ExitBtn_Click(object sender, EventArgs e)
@@ -34,12 +42,18 @@ namespace WinFormsApp1
         }
         private void endType_SelectBox(object sender, EventArgs e)
         {
-            endType = endTypeMoney.SelectedItem.ToString();            
+            endType = endTypeMoney.SelectedItem.ToString();
         }
         private void moneyTypes_DropDown(object sender, EventArgs e)
         {
             (sender as ComboBox)?.Items.Clear();
             (sender as ComboBox)?.Items.AddRange(moneyKeeper.moneys.Select(x => x.moneyName).ToArray());
+        }
+
+        private void AddMoney_Click(object sender, EventArgs e)
+        {
+            moneyCreator.Show();
+            Hide();
         }
     }
 }

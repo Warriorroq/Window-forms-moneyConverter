@@ -1,6 +1,6 @@
 ﻿namespace WinFormsApp1
 {
-    partial class Form1
+    partial class MainForm
     {
         private System.ComponentModel.IContainer components = null;
         protected override void Dispose(bool disposing)
@@ -19,6 +19,9 @@
             this.startTypeMoney = new System.Windows.Forms.ComboBox();
             this.endTypeMoney = new System.Windows.Forms.ComboBox();
             this.textEndType = new System.Windows.Forms.Label();
+            this.moneyAmount = new System.Windows.Forms.TextBox();
+            this.MoneyCount = new System.Windows.Forms.Label();
+            this.AddMoney = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // MoneyCalc
@@ -83,12 +86,42 @@
             this.textEndType.TabIndex = 6;
             this.textEndType.Text = "convert to:";
             // 
-            // Form1
+            // moneyAmount
+            // 
+            this.moneyAmount.Location = new System.Drawing.Point(40, 87);
+            this.moneyAmount.Name = "moneyAmount";
+            this.moneyAmount.Size = new System.Drawing.Size(100, 22);
+            this.moneyAmount.TabIndex = 7;
+            this.moneyAmount.Text = "1";
+            // 
+            // MoneyCount
+            // 
+            this.MoneyCount.AutoSize = true;
+            this.MoneyCount.Location = new System.Drawing.Point(40, 70);
+            this.MoneyCount.Name = "MoneyCount";
+            this.MoneyCount.Size = new System.Drawing.Size(49, 14);
+            this.MoneyCount.TabIndex = 8;
+            this.MoneyCount.Text = "Amount";
+            // 
+            // AddMoney
+            // 
+            this.AddMoney.Location = new System.Drawing.Point(199, 205);
+            this.AddMoney.Name = "AddMoney";
+            this.AddMoney.Size = new System.Drawing.Size(130, 28);
+            this.AddMoney.TabIndex = 9;
+            this.AddMoney.Text = "Add new money";
+            this.AddMoney.UseVisualStyleBackColor = true;
+            this.AddMoney.Click += new System.EventHandler(this.AddMoney_Click);
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.ClientSize = new System.Drawing.Size(486, 261);
+            this.Controls.Add(this.AddMoney);
+            this.Controls.Add(this.MoneyCount);
+            this.Controls.Add(this.moneyAmount);
             this.Controls.Add(this.textEndType);
             this.Controls.Add(this.endTypeMoney);
             this.Controls.Add(this.startTypeMoney);
@@ -97,7 +130,7 @@
             this.Controls.Add(this.MoneyCalc);
             this.Font = new System.Drawing.Font("Unispace", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ForeColor = System.Drawing.Color.Black;
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "Money";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -110,6 +143,9 @@
         private System.Windows.Forms.ComboBox startTypeMoney;
         private System.Windows.Forms.ComboBox endTypeMoney;
         private System.Windows.Forms.Label textEndType;
+        private System.Windows.Forms.TextBox moneyAmount;
+        private System.Windows.Forms.Label MoneyCount;
+        private System.Windows.Forms.Button AddMoney;
     }
 }
 

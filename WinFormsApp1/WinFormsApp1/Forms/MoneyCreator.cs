@@ -31,7 +31,7 @@ namespace WinFormsApp1
             {
                 if (moneyName.Text == string.Empty)
                 {
-                    MessageBox.Show($"Название пустое: '0,0'");
+                    MessageBox.Show($"Название пустое");
                     return;
                 }
 

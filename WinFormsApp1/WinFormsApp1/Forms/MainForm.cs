@@ -1,8 +1,6 @@
 ﻿using System.Windows.Forms;
 using System;
 using System.Linq;
-using System.Drawing;
-using System.IO;
 
 namespace WinFormsApp1
 {
@@ -49,11 +47,16 @@ namespace WinFormsApp1
             (sender as ComboBox)?.Items.Clear();
             (sender as ComboBox)?.Items.AddRange(moneyKeeper.moneys.Select(x => x.moneyName).ToArray());
         }
-
         private void AddMoney_Click(object sender, EventArgs e)
         {
             moneyCreator.Show();
             Hide();
+        }
+
+        private void globalBankBtn_Click(object sender, EventArgs e)
+        {
+            moneyKeeper.LoadBankValues();
+            MessageBox.Show(moneyKeeper.ToString());
         }
     }
 }

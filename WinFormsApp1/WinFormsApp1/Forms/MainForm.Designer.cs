@@ -22,6 +22,7 @@
             this.moneyAmount = new System.Windows.Forms.TextBox();
             this.MoneyCount = new System.Windows.Forms.Label();
             this.AddMoney = new System.Windows.Forms.Button();
+            this.globalBankBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // MoneyCalc
@@ -113,12 +114,23 @@
             this.AddMoney.UseVisualStyleBackColor = true;
             this.AddMoney.Click += new System.EventHandler(this.AddMoney_Click);
             // 
+            // globalBankBtn
+            // 
+            this.globalBankBtn.Location = new System.Drawing.Point(26, 176);
+            this.globalBankBtn.Name = "globalBankBtn";
+            this.globalBankBtn.Size = new System.Drawing.Size(303, 23);
+            this.globalBankBtn.TabIndex = 10;
+            this.globalBankBtn.Text = "Get global bank money";
+            this.globalBankBtn.UseVisualStyleBackColor = true;
+            this.globalBankBtn.Click += new System.EventHandler(this.globalBankBtn_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.ClientSize = new System.Drawing.Size(486, 261);
+            this.Controls.Add(this.globalBankBtn);
             this.Controls.Add(this.AddMoney);
             this.Controls.Add(this.MoneyCount);
             this.Controls.Add(this.moneyAmount);
@@ -146,6 +158,7 @@
         private System.Windows.Forms.TextBox moneyAmount;
         private System.Windows.Forms.Label MoneyCount;
         private System.Windows.Forms.Button AddMoney;
+        private System.Windows.Forms.Button globalBankBtn;
     }
 }
 

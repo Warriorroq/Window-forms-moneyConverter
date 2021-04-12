@@ -37,15 +37,8 @@ namespace WinFormsApp1
             moneys.Add(new Money(1, "GRN"));
             foreach (var moneyBank in moneysBank)
             {
-                if(moneyBank.Item2 != "RUB")
-                {
-                    var price = double.Parse(moneyBank.Item1.Replace('.', ','));
-                    moneys.Add(new Money(price, moneyBank.Item2));
-                }
-                else
-                {
-                    moneys.Add(new Money(0.36, "RUB"));
-                }
+                var price = double.Parse(moneyBank.Item1.Replace('.', ','));
+                moneys.Add(new Money(price, moneyBank.Item2));
             }
         }
         private void LoadStandart()

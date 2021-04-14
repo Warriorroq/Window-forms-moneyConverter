@@ -33,12 +33,11 @@ namespace WinFormsApp1
 
                 notesCourse = htmlDoc.DocumentNode.Descendants("div")
                      .Where(node => node.HasClass("course")).ToList();
-
                 notesName = htmlDoc.DocumentNode.Descendants("a")
                     .Where(node => node.HasClass("dotted")).ToList();
 
-                for (int i = 0; i < notesCourse.Count; i++)
-                    moneys.Add((notesCourse[i].InnerText.Split()[0], notesName[i].InnerText));
+                for (int i = 0; i < notesName.Count; i++)
+                    moneys.Add((notesCourse[i * 4].InnerText.Split()[0], notesName[i].InnerText));
             }
             catch
             {

@@ -6,15 +6,15 @@ namespace WinFormsApp1
 {
     public partial class MainForm : Form
     {
-        public MoneyKeeper moneyKeeper = new MoneyKeeper();
+        public MoneyKeeper moneyKeeper;
         public string startType = string.Empty;
         public string endType = string.Empty;
-        private MoneyCreator moneyCreator = null;
+        private MoneyCreator _moneyCreator = null;
         public MainForm()
         {
-            moneyCreator = new MoneyCreator(this);
-            InitializeComponent();
-            FormBorderStyle = FormBorderStyle.None;
+            moneyKeeper = new MoneyKeeper();
+            _moneyCreator = new MoneyCreator(this);
+            InitializeComponent();            
         }
         private void MoneyCalc_Click(object sender, EventArgs e)
         {
@@ -49,7 +49,7 @@ namespace WinFormsApp1
         }
         private void AddMoney_Click(object sender, EventArgs e)
         {
-            moneyCreator.Show();
+            _moneyCreator.Show();
             Hide();
         }
 

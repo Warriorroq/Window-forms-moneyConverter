@@ -23,6 +23,8 @@
             this.MoneyCount = new System.Windows.Forms.Label();
             this.AddMoney = new System.Windows.Forms.Button();
             this.globalBankBtn = new System.Windows.Forms.Button();
+            this.moneyAmountUpDown = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.moneyAmountUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // MoneyCalc
@@ -124,12 +126,20 @@
             this.globalBankBtn.UseVisualStyleBackColor = true;
             this.globalBankBtn.Click += new System.EventHandler(this.globalBankBtn_Click);
             // 
+            // moneyAmountUpDown
+            // 
+            this.moneyAmountUpDown.Location = new System.Drawing.Point(192, 88);
+            this.moneyAmountUpDown.Name = "moneyAmountUpDown";
+            this.moneyAmountUpDown.Size = new System.Drawing.Size(120, 22);
+            this.moneyAmountUpDown.TabIndex = 11;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.ClientSize = new System.Drawing.Size(486, 261);
+            this.Controls.Add(this.moneyAmountUpDown);
             this.Controls.Add(this.globalBankBtn);
             this.Controls.Add(this.AddMoney);
             this.Controls.Add(this.MoneyCount);
@@ -144,6 +154,7 @@
             this.ForeColor = System.Drawing.Color.Black;
             this.Name = "MainForm";
             this.Text = "Money";
+            ((System.ComponentModel.ISupportInitialize)(this.moneyAmountUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -159,6 +170,7 @@
         private System.Windows.Forms.Label MoneyCount;
         private System.Windows.Forms.Button AddMoney;
         private System.Windows.Forms.Button globalBankBtn;
+        private System.Windows.Forms.NumericUpDown moneyAmountUpDown;
     }
 }
 

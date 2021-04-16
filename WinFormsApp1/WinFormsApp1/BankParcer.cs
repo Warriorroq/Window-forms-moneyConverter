@@ -9,27 +9,35 @@ namespace WinFormsApp1
 {
     public class BankParcer
     {
-        private string url = "https://kurs.com.ua/";
-        private string CallUrl
+        private string _url = "https://kurs.com.ua/";
+        private string CallUrl()
         {
-            get
-            {
-                HttpClient client = new HttpClient();
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13;
-                client.DefaultRequestHeaders.Accept.Clear();
-                var response = client.GetStringAsync(url);
+            HttpClient client = new HttpClient();
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13;
+            client.DefaultRequestHeaders.Accept.Clear();
+            try {
+                var response = client.GetStringAsync(_url);
                 return response.Result;
+            }
+            catch(AggregateException) {
+                return string.Empty;
             }
         }
         public List<(string, string)> Parce()
         {
             HtmlDocument htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(CallUrl);
+            var url = CallUrl();
+            if (url != string.Empty) {
+                htmlDoc.LoadHtml(CallUrl());
+            }
+            else {
+                return null;
+            }
+
             List<HtmlNode> notesCourse = null;
             List<HtmlNode> notesName = null;
             List<(string, string)> moneys = new List<(string, string)>();
-            try
-            {
+            try {
 
                 notesCourse = htmlDoc.DocumentNode.Descendants("div")
                      .Where(node => node.HasClass("course")).ToList();
@@ -39,12 +47,9 @@ namespace WinFormsApp1
                 for (int i = 0; i < notesName.Count; i++)
                     moneys.Add((notesCourse[i * 4].InnerText.Split()[0], notesName[i].InnerText));
             }
-            catch
-            {
+            catch {
 
             }
-
-
             return moneys;
         }
     }

@@ -4,7 +4,7 @@ namespace WinFormsApp1
 {
     public class MoneyKeeper
     {
-        public List<Money> moneys = new List<Money>();
+        public List<Money> moneyTypes = new List<Money>();
         public BankParcer bank = new BankParcer();
         public MoneyKeeper()
         {
@@ -18,41 +18,59 @@ namespace WinFormsApp1
         }
         private Money Find(string name)
         {
-            foreach (var money in moneys)
-                if (money.moneyName == name)
+            foreach (var money in moneyTypes) {
+                if (money.moneyName == name) {
                     return money;
+                }
+            }
             return new Money(1, string.Empty);
+        }
+        public void Create(string name, double price)
+        {
+           moneyTypes.Add(new Money(price, name));
         }
         private bool Contains(string name)
         {
-            foreach (var money in moneys)
-                if (money.moneyName == name)
+            foreach (var money in moneyTypes) {
+                if (money.moneyName == name) {
                     return true;
+                }
+            }
             return false;
         }
-        public void LoadBankValues()
+        public List<Money> BankParse()
         {
-            var moneysBank = bank.Parce();
-            moneys.Clear();
-            moneys.Add(new Money(1, "GRN"));
-            foreach (var moneyBank in moneysBank)
-            {
+            var bankParse = bank.Parce();
+            if(bankParse is null) {
+                return null;
+            }
+
+            List<Money> moneys = new List<Money>();
+            foreach (var moneyBank in bankParse) {
                 var price = double.Parse(moneyBank.Item1.Replace('.', ','));
                 moneys.Add(new Money(price, moneyBank.Item2));
             }
+            return moneys;
+        }
+        public void LoadBankValues(List<Money> moneysBank)
+        {
+            moneyTypes.Clear();
+            moneyTypes.Add(new Money(1, "UAH"));
+            moneyTypes.AddRange(moneysBank);
         }
         private void LoadStandart()
         {
-            moneys.Add(new Money(0.36, "RUB"));
-            moneys.Add(new Money(1, "GRN"));
-            moneys.Add(new Money(27.88, "USD"));
-            moneys.Add(new Money(33.18, "EUR"));
+            moneyTypes.Add(new Money(0.36, "RUB"));
+            moneyTypes.Add(new Money(1, "GRN"));
+            moneyTypes.Add(new Money(27.88, "USD"));
+            moneyTypes.Add(new Money(33.18, "EUR"));
         }
         public override string ToString()
         {
             string message = string.Empty;
-            foreach(var money in moneys)
+            foreach(var money in moneyTypes) {
                 message += $"{money.moneyName}: {money.priceInGrn} \n";
+            }
             return message;
         }
     }

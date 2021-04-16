@@ -13,18 +13,18 @@ namespace WinFormsApp1
         public MainForm()
         {
             moneyKeeper = new MoneyKeeper();
-            _moneyCreator = new MoneyCreator(this);
-            InitializeComponent();            
+            _moneyCreator = new MoneyCreator(this);            
+            InitializeComponent();
         }
         private void MoneyCalc_Click(object sender, EventArgs e)
         {
-            try
-            {
+            double money = 0;
+
+            if (double.TryParse(moneyAmount.Text, out money)) {
                 MessageBox.Show($"Деньги: {moneyKeeper.Convert(startType, endType, double.Parse(moneyAmount.Text)):0.00}");
             }
-            catch (FormatException)
-            {
-                MessageBox.Show($"Введите деньги правильно: '0,0'");
+            else {
+                MessageBox.Show($"В вводе есть ошибки!");
             }
         }
 
@@ -45,7 +45,7 @@ namespace WinFormsApp1
         private void moneyTypes_DropDown(object sender, EventArgs e)
         {
             (sender as ComboBox)?.Items.Clear();
-            (sender as ComboBox)?.Items.AddRange(moneyKeeper.moneys.Select(x => x.moneyName).ToArray());
+            (sender as ComboBox)?.Items.AddRange(moneyKeeper.moneyTypes.Select(x => x.moneyName).ToArray());
         }
         private void AddMoney_Click(object sender, EventArgs e)
         {
@@ -55,8 +55,29 @@ namespace WinFormsApp1
 
         private void globalBankBtn_Click(object sender, EventArgs e)
         {
-            moneyKeeper.LoadBankValues();
+            var bankParse = moneyKeeper.BankParse();
+            if(bankParse is null) {
+                MessageBox.Show("Нет подключения");
+                return;
+            }
+
+            moneyKeeper.LoadBankValues(bankParse);
             MessageBox.Show(moneyKeeper.ToString());
+        }
+
+        private void moneyAmount_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar == '.')) {
+                e.KeyChar = ',';
+            }
+
+            if ((e.KeyChar == ',') && ((sender as TextBox).Text.IndexOf(',') > -1)) {
+                e.Handled = true;
+            }
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ',')) {
+                e.Handled = true;
+            }
         }
     }
 }

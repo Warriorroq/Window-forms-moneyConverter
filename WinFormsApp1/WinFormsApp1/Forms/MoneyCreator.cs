@@ -12,34 +12,31 @@ namespace WinFormsApp1
 {
     public partial class MoneyCreator : Form
     {
-        private MainForm mainMenu = null;
+        private MainForm _mainMenu = null;
         public MoneyCreator(Form form)
         {
-            mainMenu = form as MainForm;
+            _mainMenu = form as MainForm;
             InitializeComponent();
         }
 
         private void exitBtn_Click(object sender, EventArgs e)
         {
             Hide();
-            mainMenu.Show();
+            _mainMenu?.Show();
         }
 
         private void CreateBtn_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (moneyName.Text == string.Empty)
-                {
-                    MessageBox.Show($"Название пустое");
-                    return;
-                }
-
-                var newMoney = new Money(double.Parse(amountPreOne.Text), moneyName.Text);
-                mainMenu.moneyKeeper.moneys.Add(newMoney);
+            double money = 0;
+            if (moneyName.Text == string.Empty) {
+                MessageBox.Show($"Название пустое");
+                return;
             }
-            catch(FormatException)
-            {
+
+            if(double.TryParse(pricePerOnePaperText.Text, out money)) {
+                _mainMenu.moneyKeeper.Create(moneyName.Text, money);
+            }
+            else {
                 MessageBox.Show($"Введите деньги правильно: '0,0'");
             }
         }
